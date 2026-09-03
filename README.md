@@ -4,7 +4,7 @@
 
 PREPNOVA is a placement preparation platform designed to help students prepare for technical placements in an organized way.
 
-It brings learning resources, practice, projects, and interview preparation together in one platform.
+It brings learning resources, practice, projects, and interview preparation into one platform.
 
 ## Features
 
