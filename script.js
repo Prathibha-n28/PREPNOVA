@@ -44,31 +44,19 @@ searchInput.addEventListener("input", function() {
 });
 console.log(resourceCards);
 
+
+
 const progressTasks = document.querySelectorAll(".progress-task");
 const progressPercent = document.querySelector("#progress-percent");
 
-progressTasks.forEach(function(task, index) {
-
-    const savedProgress =
-        localStorage.getItem("prepNovaTask" + index);
-
-    if (savedProgress === "true") {
-        task.checked = true;
-    }
-
-});
-
-function updateProgress() {
+function updateProgressDisplay() {
 
     let completed = 0;
 
-    progressTasks.forEach(function(task, index) {
+    progressTasks.forEach(function(task) {
 
         if (task.checked) {
             completed++;
-            localStorage.setItem("prepNovaTask" + index, "true");
-        } else {
-            localStorage.setItem("prepNovaTask" + index, "false");
         }
 
     });
@@ -79,14 +67,196 @@ function updateProgress() {
     progressPercent.textContent = percentage + "%";
 }
 
+
+
+
+async function loadProgress() {
+
+    const token = localStorage.getItem("prepNovaToken");
+
+    if (!token) {
+        updateProgressDisplay();
+        return;
+    }
+
+    try {
+
+        const response = await fetch("http://localhost:5000/progress", {
+            headers: {
+                "Authorization": "Bearer " + token
+            }
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+
+            data.progress.forEach(function(value, index) {
+
+                if (progressTasks[index]) {
+                    progressTasks[index].checked = value;
+                }
+
+            });
+
+            updateProgressDisplay();
+
+        }
+
+    } catch (error) {
+
+        console.log("Unable to load progress.");
+
+    }
+
+}
+
+
+
+
+async function saveProgress() {
+
+    const token = localStorage.getItem("prepNovaToken");
+
+    if (!token) {
+        return;
+    }
+
+    const progress = [];
+
+    progressTasks.forEach(function(task) {
+
+        progress.push(task.checked);
+
+    });
+
+    try {
+
+        await fetch("http://localhost:5000/progress", {
+            method: "PUT",
+
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            },
+
+            body: JSON.stringify({
+                progress: progress
+            })
+
+        });
+
+    } catch (error) {
+
+        console.log("Unable to save progress.");
+
+    }
+
+}
+
+
+
+
 progressTasks.forEach(function(task) {
 
-    task.addEventListener("change", updateProgress);
+    task.addEventListener("change", function() {
+
+        updateProgressDisplay();
+        saveProgress();
+
+    });
 
 });
 
-updateProgress();
 
-window.addEventListener("load", function() {
-    console.log("Welcome to PREPNOVA! 🚀");
+
+
+loadProgress();
+
+
+
+
+const signupForm = document.querySelector("#signupForm");
+const signupMessage = document.querySelector("#signupMessage");
+
+signupForm.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const name = document.querySelector("#signupName").value;
+    const email = document.querySelector("#signupEmail").value;
+    const password = document.querySelector("#signupPassword").value;
+
+    try {
+
+        const response = await fetch("http://localhost:5000/signup", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: name,
+                email: email,
+                password: password
+            })
+        });
+
+        const data = await response.json();
+
+        signupMessage.textContent = data.message;
+
+    } catch (error) {
+
+        signupMessage.textContent = "Unable to connect to server.";
+
+    }
+
+});
+
+const loginForm = document.querySelector("#loginForm");
+const loginMessage = document.querySelector("#loginMessage");
+
+loginForm.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const email = document.querySelector("#loginEmail").value;
+    const password = document.querySelector("#loginPassword").value;
+
+    try {
+
+        const response = await fetch("http://localhost:5000/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password
+            })
+        });
+
+        const data = await response.json();
+
+if (response.ok) {
+    localStorage.setItem("prepNovaToken", data.token);
+}
+
+loginMessage.textContent = data.message;
+
+    } catch (error) {
+
+        loginMessage.textContent = "Unable to connect to server.";
+
+    }
+
+});
+const logoutButton = document.querySelector("#logoutButton");
+
+logoutButton.addEventListener("click", function() {
+
+    localStorage.removeItem("prepNovaToken");
+
+    alert("You have been logged out successfully!");
+
 });

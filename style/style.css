@@ -535,3 +535,80 @@ main > section:first-child > div > div {
 #progress-percent {
     font-weight: bold;
 }
+
+
+
+#login {
+    text-align: center;
+    padding: 70px 20px;
+}
+
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items:flex-start;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.auth-box {
+    width: 320px;
+    padding: 30px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.auth-box h3 {
+    margin-bottom: 20px;
+}
+
+.auth-box input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.auth-box button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.auth-box button:hover {
+    background: #1d4ed8;
+}
+
+#signupMessage,
+#loginMessage {
+    margin-top: 15px;
+    font-size: 14px;
+}
+#logoutButton {
+    padding: 10px 22px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 8px;
+    background: #2563eb;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    width: auto;
+    height: auto;
+    align-self: center;
+}
+
+#logoutButton:hover {
+    background: #1d4ed8;
+}
