@@ -2,48 +2,86 @@
 
 ## About the Project
 
-PREPNOVA is a placement preparation platform designed to help students prepare for technical placements in an organized way.
+PREPNOVA is a full-stack placement preparation platform designed to help students prepare for technical placements in an organized way.
 
-It brings learning resources, practice, projects, and interview preparation into one platform.
+It brings learning resources, practice, projects, interview preparation, user authentication, and personalized progress tracking together in one platform.
 
 ## Features
 
 - 📚 Learning resources for Java, DSA, Web Development, and Python
 - 🔎 Resource search and filtering
-- 📊 Learning progress tracker
-- 💾 Progress saved using browser localStorage
+- 📊 Personalized learning progress tracker
+- 💾 Progress stored in MongoDB
+- 🔐 User authentication with Sign Up and Login
+- 🔑 JWT-based authentication
+- 🚪 Logout functionality
 - 🧭 Interactive navigation
 - 🖱️ Interactive learning cards
 - 🎯 Placement-focused preparation
 
 ## Technologies Used
 
+### Frontend
 - HTML5
 - CSS3
 - JavaScript
+
+### Backend
+- Node.js
+- Express.js
+
+### Database
+- MongoDB Atlas
+- Mongoose
+
+### Authentication & Security
+- JSON Web Token (JWT)
+- bcrypt.js
+- CORS
+- dotenv
 
 ## Project Structure
 
 PREPNOVA/
 - index.html
 - script.js
+- README.md
+- .gitignore
+- backend/
+  - server.js
+  - package.json
+  - models/
+    - User.js
 - style/
   - style.css
-- README.md
+
+## How It Works
+
+1. Users can create an account using the Sign Up form.
+2. User passwords are securely hashed before being stored.
+3. Users can log in using their registered credentials.
+4. Successful login generates a JWT authentication token.
+5. Authenticated users can save their learning progress.
+6. Progress is stored in MongoDB and loaded again when the user returns.
+
+## Deployment
+
+- Frontend: GitHub Pages
+- Backend: Render
+- Database: MongoDB Atlas
 
 ## Future Scope
 
-- User authentication
-- Database integration
-- Personalized learning dashboard
+- Personalized dashboards
 - More quizzes and practice questions
-- Backend integration
-- User-specific progress tracking
+- Additional learning roadmaps
+- Advanced interview preparation features
+- More user-specific learning analytics
 
 ## Purpose
 
-The goal of PREPNOVA is to provide students with a simple and organized platform for placement preparation.
+The goal of PREPNOVA is to provide students with a simple, organized, and practical platform for placement preparation.
 
 ## Author
 
-Developed as a personal web development project.
+Developed as a personal full-stack web development project.

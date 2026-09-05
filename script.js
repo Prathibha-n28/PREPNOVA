@@ -81,7 +81,7 @@ async function loadProgress() {
 
     try {
 
-        const response = await fetch("http://localhost:5000/progress", {
+        const response = await fetch("https://prep-nova-backend.onrender.com/progress", {
             headers: {
                 "Authorization": "Bearer " + token
             }
@@ -132,7 +132,7 @@ async function saveProgress() {
 
     try {
 
-        await fetch("http://localhost:5000/progress", {
+        await fetch("https://prep-nova-backend.onrender.com/progress", {
             method: "PUT",
 
             headers: {
@@ -189,7 +189,7 @@ signupForm.addEventListener("submit", async function(event) {
 
     try {
 
-        const response = await fetch("http://localhost:5000/signup", {
+        const response = await fetch("https://prep-nova-backend.onrender.com/signup", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -225,7 +225,7 @@ loginForm.addEventListener("submit", async function(event) {
 
     try {
 
-        const response = await fetch("http://localhost:5000/login", {
+        const response = await fetch("https://prep-nova-backend.onrender.com/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
